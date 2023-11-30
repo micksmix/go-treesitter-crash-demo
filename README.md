@@ -1,8 +1,6 @@
 ## Usage
 
-This demonstrates a crash in go-tree-sitter, which I suspect is due to upstream tree-sitter.
-
-When scanning the JSON tests from this Perl module, [Cpanel-JSON-XS-4.37](https://metacpan.org/dist/Cpanel-JSON-XS), I found it reliably crashes my Go program. I suspect this is an issue in tree-sitter-javascript.
+This demonstrates a crash in go-tree-sitter, which I suspect is due to an issue in upstream tree-sitter.
 
 
 ## To recreate the bug:
@@ -62,8 +60,8 @@ r29     0x16b32a300
 To see it not crash, open `go.mod` and un-comment the last line with comment of "does NOT crash":
 ```
 // require github.com/smacker/go-tree-sitter v0.0.0-20230720070738-0d0a9f78d8f8 //crashes
-// require github.com/smacker/go-tree-sitter v0.0.0-20221023091341-2009a4db91e4 //crashes
-require github.com/smacker/go-tree-sitter v0.0.0-20220829074436-0a7a807924f2 //does NOT crash
+// require github.com/smacker/go-tree-sitter v0.0.0-20221023091341-2009a4db91e4 //crashes... uses tree-sitter 0.20.7
+require github.com/smacker/go-tree-sitter v0.0.0-20220829074436-0a7a807924f2 //does NOT crash... uses tree-sitter 0.20.0
 ```
 
 Then re-run: 
