@@ -70,3 +70,22 @@ Then re-run:
 go mod tidy
 go run main.go -path ./crashers
 ```
+
+## How to Fix
+
+I don't yet know the root cause for why this fixes the issue, but running:
+
+```bash
+chmod +x ./updateTreeSitter.sh
+./updateTreeSitter.sh
+go run main.go -path ./crashers```
+
+...results in no more crashes. In that script I am:
+
+- vendoring all dependencies (most importantly is github.com/smacker/go-tree-sitter`cloning v0.20.8 from `github.com/tree-sitter`
+- fixing up some paths, and copying all *.h and *.c files from that cloned repo to the vendor'd location in this repo: `./vendor/github.com/smacker/go-tree-sitter/`
+- removing all temporary files
+
+Then, re-running, there are no longer any crasehs: `go run main.go -path ./crashers`
+
+
